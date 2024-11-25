@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Entry Automation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #preview-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">📄 Data Entry Automation</h1>
+        <div class="card shadow-lg p-4">
+            <form id="upload-form">
+                <div class="mb-3">
+                    <label for="file" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" id="file" name="file" accept="image/*" required>
+                    <div id="file-error" class="text-danger"></div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Upload & Extract</button>
+            </form>
+            <div id="preview-section" class="mt-4">
+                <h3 class="text-center">Extracted Data</h3>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="preview-table"></tbody>
+                </table>
+                <button id="save-btn" class="btn btn-success w-100 mb-2">Save Data</button>
+                <button id="export-pdf-btn" class="btn btn-secondary w-100">Export to PDF</button>
+            </div>
+            <div id="message" class="mt-4 text-center"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="./script.js"></script>
+    <script>
+        const fileInput = document.getElementById('file');
+        const fileError = document.getElementById('file-error');
+        const uploadForm = document.getElementById('upload-form');
+        const previewSection = document.getElementById('preview-section');
+        const saveBtn = document.getElementById('save-btn');
+        const exportPdfBtn = document.getElementById('export-pdf-btn');
+        const messageDiv = document.getElementById('message');
+
+        uploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const file = fileInput.files[0];
+            if (!file) {
+                fileError.textContent = 'Please select a file';
+                return;
+            }
+            // Upload file logic here
+            previewSection.style.display = 'block';
+        });
+
+        saveBtn.addEventListener('click', () => {
+            // Save data logic here
+            messageDiv.textContent = 'Data saved successfully';
+        });
+
+        exportPdfBtn.addEventListener('click', () => {
+            // Export to PDF logic here
+            messageDiv.textContent = 'PDF exported successfully';
+        });
+    </script>
+</body>
+</html>
